@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Project Manager</string>
+
+    <string-array name="status_list">
+        <item>Ongoing</item>
+        <item>Upcoming</item>
+        <item>Done</item>
+    </string-array>
+</resources>

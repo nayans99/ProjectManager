@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_assign"
+        android:icon="@drawable/ic_add_white"
+        app:showAsAction="always"
+        android:title="Assign"/>
+    <item
+        android:id="@+id/action_submit"
+        android:icon="@drawable/ic_add_white"
+        android:title="submit"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_viewReport"
+        android:icon="@drawable/ic_add_white"
+        android:title="view report"
+        app:showAsAction="always" />
+</menu>
