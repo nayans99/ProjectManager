@@ -13,6 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
 
+        <activity android:name=".ViewPieChart" />
         <activity android:name=".ViewReport" />
         <activity android:name=".submitActivity" />
 

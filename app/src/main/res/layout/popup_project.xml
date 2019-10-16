@@ -73,17 +73,7 @@
                 <Button
                     android:id="@+id/breport"
                     android:layout_width="wrap_content"
-                    android:layo
-
-
-
-
-
-
-
-
-
-                    ut_height="match_parent"
+                    android:layout_height="match_parent"
                     android:background="#F268686D"
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="15dp"

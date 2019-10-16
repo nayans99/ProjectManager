@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,8 @@ public class employeeTask extends AppCompatActivity {
     RecyclerView recyclerView;
     String title;
     CardView cv;
+    Button bvp;
+    int donetasks;
     public ArrayList<projectTitles> taskList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +37,10 @@ public class employeeTask extends AppCompatActivity {
         title = intent.getExtras().getString("title");
         getSupportActionBar().setTitle(title);
         cv = findViewById(R.id.cv);
+        bvp=(Button)findViewById(R.id.buttonvp);
         recyclerView = findViewById(R.id.rveod);
         taskList = new ArrayList<>();
+        donetasks=0;
         final String emailuser = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
         Log.d("emailele", "onCreate: "+emailuser);
         FirebaseFirestore.getInstance().collection("Project").document(title).collection("tasks").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -47,8 +53,12 @@ public class employeeTask extends AppCompatActivity {
                                Log.d("emailll", "onSuccess: "+emailuser+t.getEmployee());
 
                                     taskList.add(new projectTitles(t.getTitlet(),t.getDescription(),t.getStatus(),title,t.getEmployee()));
-
+                                        if(t.getStatus().equalsIgnoreCase("complete"))
+                                        {
+                                            donetasks++;
+                                        }
                             }
+
                            LinearLayoutManager layoutManager = new LinearLayoutManager(employeeTask.this);
                            final RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
                            recyclerView.setLayoutManager(rvLiLayoutManager);
@@ -58,6 +68,15 @@ public class employeeTask extends AppCompatActivity {
                        }
 
                    });
+        bvp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(employeeTask.this,ViewPieChart.class);
+                i.putExtra("donetaskno",donetasks);
+                startActivity(i);
+            }
+        });
+
                 }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_project, menu);

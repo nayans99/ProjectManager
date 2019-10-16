@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".employeeTask"
     >
-
     <include
         layout="@layout/app_bar"
         android:layout_width="match_parent"
         android:layout_height="34dp" />
+<Button
+    android:text="VIEW PROGRESS"
+    android:id="@+id/buttonvp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rveod"
