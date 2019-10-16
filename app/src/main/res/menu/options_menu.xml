@@ -14,9 +14,4 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_add_white"/>
 
-    <item
-        android:id="@+id/action_show"
-        android:title="View Project Report"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_add_white"/>
 </menu>

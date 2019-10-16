@@ -25,7 +25,19 @@
             android:shadowColor="#B79C27B0"
             android:text="PROJECT MANAGEMENT"
             android:textAlignment="center"
-            android:textColor="#3F51B5"
+            android:textColor="#FA0F0808"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#B79C27B0"
+            android:text="WELCOME !"
+            android:textAlignment="center"
+            android:textColor="#0E1B5E"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -33,13 +45,10 @@
             android:id="@+id/emailadmin"
             android:inputType="textEmailAddress"
             android:padding="20dp"
-            android:textColor="#FFFFFF"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email Address"
-            android:textColorHighlight="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:hint="Email Address" />
 
 
         <EditText
@@ -48,10 +57,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="20dp"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:padding="20dp" />
 
 
 
@@ -63,7 +69,7 @@
             android:layout_height="wrap_content"
             android:background="#408FBB"
             android:text="LOGIN"
-            android:textColor="#FFFFFF"
+
             android:textSize="18sp" />
 
 
@@ -75,11 +81,10 @@
             android:shadowColor="#CDDC39"
             android:text="New User?"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
+            android:textColor="#FA0A0909"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-             />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
 

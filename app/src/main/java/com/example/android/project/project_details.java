@@ -52,8 +52,12 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view1) {
+                        TextView pro = view1.findViewById(R.id.tv);
+                String protitle = pro.getText().toString();
+                Intent intent = new Intent(view1.getContext(), ViewReport.class);
+                intent.putExtra("strurl",protitle);
+                mContext.startActivity(intent);
             }
         });
 
@@ -125,12 +129,6 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                                                 }
                                             });
                                     return true;
-                                case R.id.action_show:
-                                    Intent intent1 = new Intent(view.getContext(), ViewReport.class);
-                                    //  intent.putExtra("boolea", value);
-
-                                    mContext.startActivity(intent1);
-                                    return true;
                                 default:
                                     return false;
                             }
@@ -145,6 +143,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         else {
             holder.buttonViewOption.setVisibility(View.GONE);
         }
+        holder.but.setVisibility(View.GONE);
 
     }
 
@@ -166,7 +165,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
             lead = itemView.findViewById(R.id.tv_lead);
             stat = itemView.findViewById(R.id.tv_status);
             buttonViewOption=itemView.findViewById(R.id.textViewOptions);
-
+            but = itemView.findViewById(R.id.submit);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 

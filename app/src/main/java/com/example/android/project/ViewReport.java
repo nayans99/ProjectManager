@@ -58,7 +58,7 @@ public class ViewReport extends AppCompatActivity {
                         intent.setDataAndType(Uri.parse(url), "application/pdf");
                         startActivity(intent);
                     } else {
-
+                        tv.setText("Report not submitted by the manager");
                     }
                 } else {
                     Toast.makeText(ViewReport.this, "exception" + task.getException(), Toast.LENGTH_LONG).show();

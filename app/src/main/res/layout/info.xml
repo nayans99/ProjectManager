@@ -16,13 +16,18 @@ card_view:cardCornerRadius="5dp">
             android:layout_width="326dp"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+
+                >
 
             <TextView
                 android:id="@+id/tv"
@@ -30,7 +35,8 @@ card_view:cardCornerRadius="5dp">
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
-
+                android:textSize="25sp"
+                android:layout_marginBottom="10dp"
                 />
                 <TextView
                     android:id="@+id/textViewOptions"
@@ -39,6 +45,8 @@ card_view:cardCornerRadius="5dp">
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:text="&#8942;"
+                    android:background="#FFFFFF"
+
                     android:textAppearance="?android:textAppearanceLarge" />
 
                 <RelativeLayout
@@ -46,7 +54,9 @@ card_view:cardCornerRadius="5dp">
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:gravity="center">
+                    android:background="#FFFFFF"
+
+                    android:gravity="center">
 
                 <View
                     android:layout_width="12dp"
@@ -66,22 +76,39 @@ card_view:cardCornerRadius="5dp">
                     android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:textSize="15sp"
+                    android:layout_marginStart="50dp"
+
+                    />
 
                 <TextView
                     android:id="@+id/tv_lead"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginStart="50dp"
+
+
+                    />
 
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginStart="50dp"
+
+                    />
 
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/submit"
+                    android:layout_gravity="center"
+                    android:text="Submit report" />
             </LinearLayout>
-
-
 
 
 

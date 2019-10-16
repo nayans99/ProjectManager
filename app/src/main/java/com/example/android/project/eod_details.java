@@ -12,19 +12,22 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
+public class
+eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
     private SparseBooleanArray expandState = new SparseBooleanArray();
@@ -50,11 +53,17 @@ public class eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
         holder.setIsRecyclable(false);
         TextView name = holder.title;
         name.setText(pro_title.get(position).getDname());
-       holder.desc.setText(pro_title.get(position).getLead());
-       String stat = pro_title.get(position).getDesc();
-       if(stat.equals("Incomplete"))
-           holder.cv.setCardBackgroundColor(0xfff00000);
-       holder.veod.setOnClickListener(new View.OnClickListener() {
+       holder.desc.setText(pro_title.get(position).getDesc());
+       String stat = pro_title.get(position).getLead();
+       if(stat.equals("Incomplete")) {
+           holder.cv.setCardBackgroundColor(0xB0EC1414);
+       }
+       else {
+           holder.cv.setCardBackgroundColor(0xff00f059);
+           holder.done.setVisibility(View.GONE);
+       }
+
+        holder.veod.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
 
@@ -75,8 +84,16 @@ public class eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
                                Map<String, Object> promap = new HashMap<>();
                                promap.put("Status","Complete");
          FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString())
-                 .collection("tasks").document(pro_title.get(position).getLead().toString() ).update("Status","Complete");
-                               Intent intent = new Intent(view.getContext(), employeeTask.class);
+                 .collection("tasks").document(pro_title.get(position).getDname().toString() ).update("Status","Complete");
+         FirebaseFirestore.getInstance().collection("USERS").document(pro_title.get(position).getDate())
+                 .collection("tasks").document(pro_title.get(position).getDname().toString()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+             @Override
+             public void onSuccess(Void aVoid) {
+                 Toast.makeText(mContext, "Marked Complete", Toast.LENGTH_SHORT).show();
+             }
+         });
+
+         Intent intent = new Intent(view.getContext(), employeeTask.class);
                                intent.putExtra("title",pro_title.get(position).getStat());
                                mContext.startActivity(intent);
                            }})

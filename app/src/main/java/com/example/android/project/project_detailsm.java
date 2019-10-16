@@ -23,11 +23,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class project_detailsm extends RecyclerView.Adapter<project_detailsm.ViewHolder> implements View.OnClickListener {
 
@@ -50,7 +52,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -63,9 +65,18 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                             view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popupView = inflater.inflate(R.layout.popup_project, null);
 
+                    if(status.equals("Done")) {
+                        popupView.findViewById(R.id.bview).setVisibility(View.GONE);
+                        popupView.findViewById(R.id.breport);
+                    }
+                    if(status.equals("Upcoming"))
+                        popupView.findViewById(R.id.breport).setVisibility(View.GONE);
+
+
+
                     // create the popup window
-                    int width = 700;
-                    int height = 550;
+                    int width = MATCH_PARENT;
+                    int height = 1300;
                     boolean focusable = true; // lets taps outside the popup also dismiss it
 
                     projecttitle = popupView.findViewById(R.id.projecttitle);
@@ -75,9 +86,17 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                     viewtask = popupView.findViewById(R.id.bview);
                     report = popupView.findViewById(R.id.breport);
 
-                    projecttitle.setText(pt);
-                    prodesc.setText(pdesc);
-                    prolead.setText(pl);
+                   TextView t = view.findViewById(R.id.tv);
+                   final TextView d = view.findViewById(R.id.tvdesc);
+                    projecttitle.setText(t.getText().toString());
+                    FirebaseFirestore.getInstance().collection("Project").document(t.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            final ProjectDetails pd = documentSnapshot.toObject(ProjectDetails.class);
+                            prodesc.setText(pd.getDescription());
+                        }
+                    });
+                  //  prolead.setText(pl);
 
                     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
@@ -102,6 +121,15 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                             mContext.startActivity(intent);
                         }
                     });
+                    report.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(view.getContext(), submitActivity.class);
+
+                            mContext.startActivity(intent);
+                        }
+                    });
+
                 }
             });
 
@@ -123,7 +151,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
         pl = pro_title.get(position).getLead();
         final boolean isExpanded = expandState.get(position);
         holder.expandableLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-
+        holder.buttonLayout.setVisibility(View.GONE);
         holder.buttonLayout.setRotation(expandState.get(position) ? 180f : 0f);
         holder.buttonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +161,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
         });
 
 
-        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+      /*  holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
 
@@ -182,7 +210,8 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                 popup.show();
 
             }
-        });
+        });*/
+      holder.buttonViewOption.setVisibility(View.GONE);
     }
 
 

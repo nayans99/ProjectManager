@@ -3,6 +3,8 @@ package com.example.android.project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +31,7 @@ public class employeeTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         title = intent.getExtras().getString("title");
-        getSupportActionBar().setTitle("Admin eod");
+        getSupportActionBar().setTitle(title);
         cv = findViewById(R.id.cv);
         recyclerView = findViewById(R.id.rveod);
         taskList = new ArrayList<>();
@@ -44,7 +46,7 @@ public class employeeTask extends AppCompatActivity {
                                 taskm t = documentSnapshot.toObject(taskm.class);
                                Log.d("emailll", "onSuccess: "+emailuser+t.getEmployee());
 
-                                    taskList.add(new projectTitles(t.getTitlet(),t.getDescription(),t.getStatus(),title));
+                                    taskList.add(new projectTitles(t.getTitlet(),t.getDescription(),t.getStatus(),title,t.getEmployee()));
 
                             }
                            LinearLayoutManager layoutManager = new LinearLayoutManager(employeeTask.this);
@@ -57,6 +59,23 @@ public class employeeTask extends AppCompatActivity {
 
                    });
                 }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_project, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_add_post: {
+                finish();
+                Intent intent = new Intent(this, addtaskActivity.class);
+                intent.putExtra("title",title);
+                startActivity(intent);
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
             }
 
 

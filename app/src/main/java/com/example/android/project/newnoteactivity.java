@@ -119,12 +119,13 @@ public class newnoteactivity extends AppCompatActivity {
         map.put("Date",formattedDate);
         map.put("Description",description);
         map.put("Title",title);
-        map.put("Task",notetask);
-        CollectionReference notebookref= FirebaseFirestore.getInstance().collection("USERS");
-        notebookref.document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("EOD").document(title).set(map);
+        map.put("Project",notetask);
+        map.put("Author",FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
+        CollectionReference notebookref= FirebaseFirestore.getInstance().collection("Report");
+        notebookref.document(notepro).set(map);
      //   notebookref.add(new note(title,description,priority));
         Toast.makeText(newnoteactivity.this,"note added",Toast.LENGTH_SHORT).show();
-        FirebaseFirestore.getInstance().collection("Project").document(notepro).collection("tasks").document(notetask).update("EOD",title);
+       // FirebaseFirestore.getInstance().collection("Project").document(notepro).collection("tasks").document(notetask).update("EOD",title);
         finish();
     }
 

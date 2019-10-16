@@ -36,7 +36,7 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
-        news = i.getStringExtra("str");
+        news = i.getStringExtra("title");
         ename = (EditText) findViewById(R.id.assignedEmployee);
         tname = (EditText) findViewById(R.id.tasktitle);
         sub = (Button) findViewById(R.id.submit);
@@ -76,7 +76,10 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                 emp.put("projectname",news);
                 emp.put("taskdesc",tdesc.getText().toString().trim());
 
-                FirebaseFirestore.getInstance().collection("Project").document(news).collection("tasks").document(tname.getText().toString()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseFirestore.getInstance().collection("Project")
+                        .document(news).collection("tasks")
+                        .document(tname.getText().toString()).set(map)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(addtaskActivity.this, "Assigned", Toast.LENGTH_LONG).show();

@@ -57,63 +57,13 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
         final View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view1) {
-                LayoutInflater inflater = (LayoutInflater)
-                        view1.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup_task, null);
-
-                // create the popup window
-                int width = 1000;
-                int height = 550;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-
-                projectname = popupView.findViewById(R.id.projectname);
-                taskname = popupView.findViewById(R.id.taskname);
-                taskdesc = popupView.findViewById(R.id.taskdesc);
-
-               final TextView textView = view.findViewById(R.id.tv);
-                FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("tasks").get().
-                        addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                 @Override
-                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                                         task pd = documentSnapshot.toObject(task.class);
-                                                         if(pd.getTaskname().equals(textView.getText().toString()))
-                                                         taskdesc.setText(pd.getTaskdesc());
-                                                         projectname.setText(pd.getProjectname());
-                                                     }
-                                                 }
-
-            });
-                taskname.setText(textView.getText().toString());
-
-
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(view1, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-            }
-        });
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-       String tlead = "Team Lead : ";
+       String tlead = "Project : ";
         holder.setIsRecyclable(false);
         projectTitles item=pro_title.get(position);
         holder.title.setTag(item);
@@ -132,7 +82,15 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
                 onClickButton(holder.expandableLayout, holder.buttonLayout,  position);
             }
         });
-
+        holder.but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), newnoteactivity.class);
+                intent.putExtra("project",pro_title.get(position).getDname());
+                intent.putExtra("task",pro_title.get(position).getLead());
+                mContext.startActivity(intent);
+            }
+        });
         holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -197,6 +155,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
             lead = itemView.findViewById(R.id.tv_lead);
             stat = itemView.findViewById(R.id.tv_status);
             buttonViewOption=itemView.findViewById(R.id.textViewOptions);
+            but = itemView.findViewById(R.id.submit);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 
