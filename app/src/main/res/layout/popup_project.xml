@@ -32,7 +32,6 @@
                 android:textColor="#0C0404"
                 android:textSize="15sp"
                 android:layout_marginStart="20dp"
-
                 />
 
             <TextView
@@ -82,8 +81,6 @@
                     android:layout_margin="16dp"
                     />
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 

@@ -45,6 +45,7 @@
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".login"/>
+        <activity android:name=".taskEOD"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

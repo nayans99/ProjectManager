@@ -243,8 +243,6 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
             buttonll = itemView.findViewById(R.id.buttonll);
-
-
         }
     }
     private void onClickButton(final LinearLayout expandableLayout, final RelativeLayout buttonLayout, final  int i) {

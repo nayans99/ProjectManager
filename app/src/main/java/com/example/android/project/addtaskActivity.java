@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -75,6 +76,7 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                 emp.put("taskname",tname.getText().toString());
                 emp.put("projectname",news);
                 emp.put("taskdesc",tdesc.getText().toString().trim());
+                emp.put("status","Incomplete");
 
                 FirebaseFirestore.getInstance().collection("Project")
                         .document(news).collection("tasks")
@@ -86,6 +88,8 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                         FirebaseFirestore.getInstance().collection("Project").document(news).update(promap);
                         FirebaseFirestore.getInstance().collection("USERS").document(ename.getText().toString()).collection("tasks").
                         document(tname.getText().toString()).set(emp);
+                        FirebaseFirestore.getInstance().collection("Project").document(news)
+                                .update("task", FieldValue.increment(1));
                         Intent intent = new Intent(addtaskActivity.this,Manager.class);
                         startActivity(intent);
                     }
@@ -98,8 +102,7 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                     }
                 });
             }
-        });
-    }
+        });    }
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {

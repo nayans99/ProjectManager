@@ -100,6 +100,9 @@ public class addProjectForm extends AppCompatActivity implements DatePickerDialo
                 map.put("TeamLead", lead.getText().toString().trim());
                 map.put("Status", status.getSelectedItem().toString().trim());
                 map.put("Date",Date);
+                map.put("taskg",0);
+                map.put("task",0);
+
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 // add entry to firestore

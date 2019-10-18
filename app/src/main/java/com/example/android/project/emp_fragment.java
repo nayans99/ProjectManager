@@ -127,8 +127,8 @@ public class emp_fragment extends Fragment {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             task pd = documentSnapshot.toObject(task.class);
-                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getTaskdesc()));
-
+                            if(pd.getStatus().equals("Incomplete"))
+                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getStatus()));
                         }
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

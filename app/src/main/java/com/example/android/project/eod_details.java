@@ -19,7 +19,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -66,7 +71,9 @@ eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
         holder.veod.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-
+               Intent intent = new Intent(view.getContext(), taskEOD.class);
+               intent.putExtra("title",pro_title.get(position).getDname().toString());
+               mContext.startActivity(intent);
            }
        });
        holder.done.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +92,10 @@ eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
                                promap.put("Status","Complete");
          FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString())
                  .collection("tasks").document(pro_title.get(position).getDname().toString() ).update("Status","Complete");
+         FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString())
+                                       .update("taskg", FieldValue.increment(1));
          FirebaseFirestore.getInstance().collection("USERS").document(pro_title.get(position).getDate())
-                 .collection("tasks").document(pro_title.get(position).getDname().toString()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                 .collection("tasks").document(pro_title.get(position).getDname().toString()).update("status","Complete").addOnSuccessListener(new OnSuccessListener<Void>() {
              @Override
              public void onSuccess(Void aVoid) {
                  Toast.makeText(mContext, "Marked Complete", Toast.LENGTH_SHORT).show();
@@ -103,6 +112,15 @@ eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
        });
 
     }
+
+    public void deleteitem(int position) {
+        FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString())
+                .collection("tasks").document(pro_title.get(position).getDname().toString()).delete();
+        FirebaseFirestore.getInstance().collection("USERS").document(pro_title.get(position).getDate()).collection("tasks").
+                document(pro_title.get(position).getDname()).delete();
+        Toast.makeText(mContext, "Task Deleted", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public int getItemCount() {
         return pro_title.size();

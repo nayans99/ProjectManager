@@ -1,33 +1,45 @@
 package com.example.android.project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class employeeTask extends AppCompatActivity {
     RecyclerView recyclerView;
     String title;
+    private noteadapter adapter;
     CardView cv;
     Button bvp;
     int donetasks;
+    int num,den;
     public ArrayList<projectTitles> taskList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,22 +74,60 @@ public class employeeTask extends AppCompatActivity {
                            LinearLayoutManager layoutManager = new LinearLayoutManager(employeeTask.this);
                            final RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
                            recyclerView.setLayoutManager(rvLiLayoutManager);
-                           eod_details dom = new eod_details(employeeTask.this, taskList);
+                           final eod_details dom = new eod_details(employeeTask.this, taskList);
                            recyclerView.setAdapter(dom);
 
-                       }
 
-                   });
+                new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+                        new AlertDialog.Builder(employeeTask.this)
+                                .setTitle("Delete Task")
+                                .setMessage("Do ypu want to delete Task")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        dom.deleteitem(viewHolder.getAdapterPosition());
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+
+                    }
+                }).attachToRecyclerView(recyclerView);
+            }
+        });
+
+        FirebaseFirestore.getInstance().collection("Project").document(title).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("nayanna", "onCreate: ");
+
+                    if(document.exists()){
+                        num = document.getLong("taskg").intValue();
+                        den = document.getLong("task").intValue();
+                    }
+                }
+            }
+        });
+
         bvp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(employeeTask.this,ViewPieChart.class);
-                i.putExtra("donetaskno",donetasks);
+                i.putExtra("taskg",num);
+                i.putExtra("task",den);
                 startActivity(i);
             }
         });
-
-                }
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_project, menu);
         return super.onCreateOptionsMenu(menu);
@@ -95,7 +145,7 @@ public class employeeTask extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-            }
+}
 
 
 
