@@ -166,7 +166,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
             stat = itemView.findViewById(R.id.tv_status);
             buttonViewOption=itemView.findViewById(R.id.textViewOptions);
             but = itemView.findViewById(R.id.submit);
-            but2 = itemView.findViewById(R.id.view);
+            but2 = itemView.findViewById(R.id.view2);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 

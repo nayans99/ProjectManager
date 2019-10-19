@@ -36,7 +36,7 @@
                 android:ems="10"
                 android:hint="Project Title"
                 android:inputType="textPersonName"
-                android:textColor="#FFFFFF"
+
                 android:textSize="25sp" />
 
             <EditText
@@ -46,7 +46,6 @@
                 android:layout_margin="15dp"
                 android:ems="10"
                 android:hint="Description"
-                android:textColor="#FFFFFF"
                 android:inputType="textPersonName"
                 android:textSize="25sp" />
 
@@ -58,7 +57,7 @@
                 android:ems="10"
                 android:hint="Project Leader"
                 android:inputType="textPersonName"
-                android:textColor="#FFFFFF"
+
                 android:textSize="25sp" />
 
             <Button
@@ -67,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#40B1BB"
-                android:textColor="#FFFFFF"
+
                 android:text="Pick a Date"
                 android:textSize="25sp"
                 />

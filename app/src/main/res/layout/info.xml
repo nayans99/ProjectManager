@@ -38,16 +38,18 @@ card_view:cardCornerRadius="5dp">
                 android:textSize="25sp"
                 android:layout_marginBottom="10dp"
                 />
+
                 <TextView
                     android:id="@+id/textViewOptions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:text="&#8942;"
+                    android:layout_alignParentRight="true"
                     android:background="#FFFFFF"
+                    android:text="&#8942;"
 
-                    android:textAppearance="?android:textAppearanceLarge" />
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="#1AC0B1" />
 
                 <RelativeLayout
                 android:id="@+id/button"
@@ -76,48 +78,52 @@ card_view:cardCornerRadius="5dp">
                     android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:layout_marginStart="50dp"
+                    android:textColor="#1AC0B1"
 
-                    />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_lead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:layout_marginStart="50dp"
+                    android:textColor="#833C2A2A"
 
 
-                    />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:layout_marginStart="50dp"
+                    android:textColor="#833C2A2A"
 
-                    />
+                    android:textSize="15sp" />
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/submit"
-                    android:layout_gravity="center"
-                    android:text="Submit report" />
 
-                <Button
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#D51BADF0"
+        android:gravity="center"
+        android:text="Submit report" />
+
+    <Button
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:background="#D51BADF0"
+        android:text="Button" />
 </LinearLayout>
             </LinearLayout>
 
