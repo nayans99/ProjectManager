@@ -118,6 +118,10 @@ eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
                 .collection("tasks").document(pro_title.get(position).getDname().toString()).delete();
         FirebaseFirestore.getInstance().collection("USERS").document(pro_title.get(position).getDate()).collection("tasks").
                 document(pro_title.get(position).getDname()).delete();
+        FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString()).update("task",FieldValue.increment(-1));
+        if(pro_title.get(position).getLead().equals("Complete"))
+            FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getStat().toString()).update("taskg",FieldValue.increment(-1));
+
         Toast.makeText(mContext, "Task Deleted", Toast.LENGTH_SHORT).show();
     }
 

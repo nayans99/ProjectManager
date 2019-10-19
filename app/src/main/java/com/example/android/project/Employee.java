@@ -50,7 +50,7 @@ public class Employee extends AppCompatActivity {
                 }
                 case R.id.nav_profile:{
                     actionBar.setTitle("EOD");
-                    smartui fragment2 = new smartui();
+                    emp_fragment2 fragment2 = new emp_fragment2();
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                     ft2.replace(R.id.content, fragment2, "");
                     ft2.commit();
@@ -64,21 +64,5 @@ public class Employee extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_add_post: {
-                finish();
-                startActivity(new Intent(this, addProjectForm.class));
-                break;
-            }
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

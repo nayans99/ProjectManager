@@ -140,7 +140,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
         });
         if(pro_title.get(position).getStat().equals("Complete"))
             holder.but.setVisibility(View.GONE);
-        if(pro_title.get(position).getStat().equals("Inomplete"))
+        if(pro_title.get(position).getStat().equals("Incomplete"))
             holder.but2.setVisibility(View.GONE);
     }
 

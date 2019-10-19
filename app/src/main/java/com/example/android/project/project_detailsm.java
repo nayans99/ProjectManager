@@ -117,7 +117,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(view.getContext(), employeeTask.class);
-                            intent.putExtra("title",pt);
+                            intent.putExtra("title",projecttitle.getText().toString());
                             mContext.startActivity(intent);
                         }
                     });
@@ -125,7 +125,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(view.getContext(), submitActivity.class);
-                            intent.putExtra("title",pt);
+                            intent.putExtra("title",projecttitle.getText().toString());
                             mContext.startActivity(intent);
                         }
                     });

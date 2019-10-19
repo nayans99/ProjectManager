@@ -92,8 +92,16 @@ public class employeeTask extends AppCompatActivity {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         dom.deleteitem(viewHolder.getAdapterPosition());
+                                        Intent intent1 = new Intent(employeeTask.this,employeeTask.class);
+                                        startActivity(intent1);
                                     }})
-                                .setNegativeButton(android.R.string.no, null).show();
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Intent intent1 = new Intent(employeeTask.this,employeeTask.class);
+                                        startActivity(intent1);
+                                    }
+                                }).show();
 
                     }
                 }).attachToRecyclerView(recyclerView);

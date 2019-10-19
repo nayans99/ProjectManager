@@ -45,7 +45,7 @@ public class emp_fragment2 extends Fragment {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             task pd = documentSnapshot.toObject(task.class);
                             if(pd.getStatus().equals("Complete"))
-                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getStatus()));
+                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getStatus(),pd.getDate()));
                         }
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
