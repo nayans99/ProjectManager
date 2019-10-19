@@ -38,7 +38,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
 
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
-    String role,td,tn,pn;
+    String role;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
     public project_detailse(Context context, ArrayList<projectTitles> title){
@@ -66,8 +66,8 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
         projectTitles item=pro_title.get(position);
         holder.title.setTag(item);
         TextView name = holder.title;
-        name.setText(pro_title.get(position).getDname());
-        holder.desc.setText(pro_title.get(position).getDesc());
+        name.setText(pro_title.get(position).getDesc());
+        holder.desc.setText(pro_title.get(position).getDname());
         holder.lead.setText(tlead + pro_title.get(position).getLead());
         holder.stat.setText(pro_title.get(position).getDate());
         final boolean isExpanded = expandState.get(position);
@@ -85,7 +85,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), newnoteactivity.class);
                 intent.putExtra("project",pro_title.get(position).getDname());
-                intent.putExtra("task",pro_title.get(position).getLead());
+                intent.putExtra("task",pro_title.get(position).getDesc());
                 mContext.startActivity(intent);
             }
         });
@@ -93,7 +93,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), taskEOD.class);
-                intent.putExtra("title",pro_title.get(position).getLead());
+                intent.putExtra("title",pro_title.get(position).getDesc());
                 mContext.startActivity(intent);
             }
         });
@@ -101,7 +101,6 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
         holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
 
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mContext, holder.buttonViewOption);
@@ -125,7 +124,7 @@ public class project_detailse extends RecyclerView.Adapter<project_detailse.View
                             case R.id.action_eod:
                                 Intent intent = new Intent(view.getContext(), newnoteactivity.class);
                                 intent.putExtra("project",pro_title.get(position).getDname());
-                                intent.putExtra("task",pro_title.get(position).getLead());
+                                intent.putExtra("task",pro_title.get(position).getDesc());
                                 mContext.startActivity(intent);
 
                                 return true;

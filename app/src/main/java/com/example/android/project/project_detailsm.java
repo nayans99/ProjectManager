@@ -61,7 +61,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    LayoutInflater inflater = (LayoutInflater)
+                    final LayoutInflater inflater = (LayoutInflater)
                             view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popupView = inflater.inflate(R.layout.popup_project, null);
 
@@ -125,7 +125,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(view.getContext(), submitActivity.class);
-
+                            intent.putExtra("title",pt);
                             mContext.startActivity(intent);
                         }
                     });

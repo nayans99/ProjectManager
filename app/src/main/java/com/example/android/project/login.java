@@ -70,14 +70,17 @@ public class login extends AppCompatActivity {
                                                     switch(desig){
                                                         case "Admin":
                                                             Intent intent=new Intent(login.this,Admin.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                             startActivity(intent);
                                                             break;
                                                         case "Manager":
                                                             Intent intent2 = new Intent(login.this, Manager.class);
+                                                            intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                             startActivity(intent2);
                                                             break;
                                                         case "Employee":
                                                             Intent intent3=new Intent(login.this,Employee.class);
+                                                            intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                             startActivity(intent3);
                                                             break;
 

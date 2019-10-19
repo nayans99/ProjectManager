@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,9 @@ public class emp_fragment extends Fragment {
     public ArrayList<projectTitles> projectList;
     private RecyclerView.Adapter Adapter;
     List<String> list;
+    String deadate;
+    NotificationCompat.Builder notification;
+    private static final int id = 45412;
     String b;
     @Nullable
     @Override
@@ -128,7 +132,7 @@ public class emp_fragment extends Fragment {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             task pd = documentSnapshot.toObject(task.class);
                             if(pd.getStatus().equals("Incomplete"))
-                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getStatus()));
+                            projectList.add(new projectTitles(pd.getProjectname(),pd.getTaskname(),pd.getTaskdesc(),pd.getStatus(),pd.getDate()));
                         }
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -139,6 +143,7 @@ public class emp_fragment extends Fragment {
                         }
 
                 });
+
 
 
         return view;

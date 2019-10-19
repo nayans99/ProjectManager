@@ -65,10 +65,7 @@ public class employeeTask extends AppCompatActivity {
                                Log.d("emailll", "onSuccess: "+emailuser+t.getEmployee());
 
                                     taskList.add(new projectTitles(t.getTitlet(),t.getDescription(),t.getStatus(),title,t.getEmployee()));
-                                        if(t.getStatus().equalsIgnoreCase("complete"))
-                                        {
-                                            donetasks++;
-                                        }
+
                             }
 
                            LinearLayoutManager layoutManager = new LinearLayoutManager(employeeTask.this);

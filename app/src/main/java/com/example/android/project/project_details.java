@@ -145,6 +145,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         }
         holder.but.setVisibility(View.GONE);
 
+
     }
 
     @Override

@@ -48,7 +48,6 @@ public class admin_fragment extends Fragment {
                 recyclerView.setAdapter(dom);
             }
         });
-        Log.d("lips4t", "onCreateView: "+projectList);
         return view;
     }
 

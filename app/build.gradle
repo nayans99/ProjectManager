@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation 'com.google.firebase:firebase-database:19.1.0'
+
     implementation 'com.google.firebase:firebase-storage:19.1.0'
 }
 apply plugin: 'com.google.gms.google-services'

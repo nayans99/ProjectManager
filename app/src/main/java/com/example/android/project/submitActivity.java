@@ -49,10 +49,7 @@ public class submitActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.notification);
         firebaseFirestore = FirebaseFirestore.getInstance();
         Intent i = getIntent();
-        news = i.getStringExtra("str");
-        news2 = i.getStringExtra("str1");
-        news3 = i.getStringExtra("str2");
-        news4 = i.getStringExtra("str3");
+        news = i.getStringExtra("title");
         chfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +69,7 @@ public class submitActivity extends AppCompatActivity {
 
                     uploadpdf(pdf);
                 } else {
-                    Toast.makeText(submitActivity.this, "error2", Toast.LENGTH_LONG).show();
+                    Toast.makeText(submitActivity.this, "Choose PDF", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -108,7 +105,7 @@ public class submitActivity extends AppCompatActivity {
                 map.put("Status", "Done");
                 map.put("Date", "abc");
                 map.put("report", url);
-                firebaseFirestore.collection("Project").document(news).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                firebaseFirestore.collection("Project").document(news).update("report",url).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
@@ -117,26 +114,15 @@ public class submitActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                     final String downloadUrl = String.valueOf(task.getResult().getStorage().getDownloadUrl());
-                                    map.put("Title", news);
-                                    map.put("Description", news2);
-                                    map.put("TeamLead", news3);
-                                    map.put("Status", "Done");
-                                    map.put("Date", "abc");
-                                    map.put("report", downloadUrl);
-                                    firebaseFirestore.collection("Project").document(news).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    firebaseFirestore.collection("Project").document(news).update("report",downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             finalpath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
                                                     String Url = uri.toString();
-                                                    map.put("Title", news);
-                                                    map.put("Description", news2);
-                                                    map.put("TeamLead", news3);
-                                                    map.put("Status", "Done");
-                                                    map.put("Date", "abc");
-                                                    map.put("report", Url);
-                                                    firebaseFirestore.collection("Project").document(news).set(map);
+                                                    firebaseFirestore.collection("Project").document(news).update("report",Url);
+                                                    firebaseFirestore.collection("Project").document(news).update("Status","Done");
                                                 }
                                             });
                                         }

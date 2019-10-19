@@ -1,6 +1,9 @@
 package com.example.android.project;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,11 +33,14 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
     Button sub;
     Bundle extras;
     String news;
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addtask);
         super.onCreate(savedInstanceState);
+
+       dp = new DatePicker();
 
         Intent i = getIntent();
         news = i.getStringExtra("title");
@@ -68,7 +74,6 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                 map.put("Status","Incomplete");
                 map.put("Description",tdesc.getText().toString().trim());
 
-
                 final Map<String, Object> promap = new HashMap<>();
                 promap.put("Status","Ongoing");
 
@@ -77,6 +82,7 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                 emp.put("projectname",news);
                 emp.put("taskdesc",tdesc.getText().toString().trim());
                 emp.put("status","Incomplete");
+                emp.put("date",Date);
 
                 FirebaseFirestore.getInstance().collection("Project")
                         .document(news).collection("tasks")
@@ -96,13 +102,14 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
-
                         Toast.makeText(addtaskActivity.this, "Error!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-        });    }
+        });
+
+
+    }
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
@@ -112,5 +119,18 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         Date = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+
+        Intent i=new Intent(addtaskActivity.this,AlarmReceiver.class);
+
+        i.putExtra("Topic",tname.getText().toString().trim());
+        i.putExtra("Employee",ename.getText().toString().trim());
+        i.putExtra("time",Date);
+
+        PendingIntent alarmintent=PendingIntent.getBroadcast(addtaskActivity.this,1,i,0);
+
+        AlarmManager alarm=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        long alarmStartTime=c.getTimeInMillis();
+        alarm.setExact(AlarmManager.RTC_WAKEUP,alarmStartTime,alarmintent);
     }
 }
