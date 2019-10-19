@@ -50,16 +50,6 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view1) {
-                        TextView pro = view1.findViewById(R.id.tv);
-                String protitle = pro.getText().toString();
-                Intent intent = new Intent(view1.getContext(), ViewReport.class);
-                intent.putExtra("strurl",protitle);
-                mContext.startActivity(intent);
-            }
-        });
 
         return viewHolder;
     }
@@ -144,7 +134,16 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
             holder.buttonViewOption.setVisibility(View.GONE);
         }
         holder.but.setVisibility(View.GONE);
-
+        holder.but2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView pro = view.findViewById(R.id.tv);
+                String protitle = pro.getText().toString();
+                Intent intent = new Intent(view.getContext(), ViewReport.class);
+                intent.putExtra("strurl",protitle);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
@@ -157,7 +156,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         TextView title,desc,lead,stat,buttonViewOption;
         public RelativeLayout buttonLayout;
         public LinearLayout expandableLayout;
-        Button but;
+        Button but,but2;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -167,6 +166,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
             stat = itemView.findViewById(R.id.tv_status);
             buttonViewOption=itemView.findViewById(R.id.textViewOptions);
             but = itemView.findViewById(R.id.submit);
+            but2 = itemView.findViewById(R.id.view2);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 
